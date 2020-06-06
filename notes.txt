@@ -1,0 +1,16 @@
+// instalação do expo
+npm install -g expo
+
+// inicialização da aplicação
+expo init mobile
+
+// executar aplicação
+expo start
+
+// instalação de fontes
+expo install @expo-google-fonts/ubuntu @expo-google-fonts/roboto expo-font
+
+
+npm install @react-navigation/native
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm install @react-navigation/stack

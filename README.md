@@ -1,4 +1,4 @@
-## Ecoleta FrontEnd
+## Ecoleta Mobile
 
 Aplicação para gerenciar fluxo de coletas e descartes ecológicos. <br>
 

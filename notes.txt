@@ -25,3 +25,12 @@ expo install expo-constants
 expo install react-native-svg
 
 npm install axios
+
+// capturar localização atual
+expo install expo location
+
+// para botao de email
+expo install expo-mail-composer
+
+// input selec
+npm install react-native-picker-select

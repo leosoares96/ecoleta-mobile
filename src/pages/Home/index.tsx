@@ -1,43 +1,73 @@
-import React from 'react';
+import React,{useState, ChangeEvent} from 'react';
 import { Feather as Icon} from '@expo/vector-icons'
-import {View, ImageBackground, Image, Text, StyleSheet} from 'react-native';
+import {View, ImageBackground, Image, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform} from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import api from './../../services';
 
 const Home = () =>{
 
   const navigation = useNavigation();
+  const [uf, setUf] = useState<string>();
+  const [city, setCity] = useState<string>();
 
-  function HancleNavigatePoints(){
-    navigation.navigate('Points');
+
+  function handleNavigatePoints(){
+    navigation.navigate('Points', {
+      uf,
+      city
+    });
   }
 
+
   return (
-    <ImageBackground 
-        source={require('../../assets/home-background.png')} 
-        style={styles.container}
-        imageStyle={{ width: 274, height: 368 }}
+    <KeyboardAvoidingView
+      style={{ flex:1 }}
+      behavior={Platform.OS ==='ios' ? 'padding':undefined}
+    >
+      <ImageBackground 
+          source={require('../../assets/home-background.png')} 
+          style={styles.container}
+          imageStyle={{ width: 274, height: 368 }}
 
-        >
-      <View style={styles.main}>
-        <Image source={require('../../assets/logo.png')} />
-        <Text style={styles.title}>Seu marketplace de coleta de resíduos.</Text>
-        <Text style={styles.description}>Ajudamos pessoas a encontrar pontos de coleta de forma eficiente.</Text>
-      </View>
+          >
+        <View style={styles.main}>
+          <Image source={require('../../assets/logo.png')} />
+          <Text style={styles.title}>Seu marketplace de coleta de resíduos.</Text>
+          <Text style={styles.description}>Ajudamos pessoas a encontrar pontos de coleta de forma eficiente.</Text>
+        </View>
 
-      <View style={styles.footer}>
-        <RectButton style={styles.button} onPress={HancleNavigatePoints}>
-          <View style={styles.buttonIcon}>
-            <Text>
-              <Icon name="arrow-right" color="#FFF" size={24}/>
+        <View style={styles.footer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Selecione a UF"
+            autoCapitalize="characters"
+            maxLength={2}
+            autoCorrect={false}
+            value={uf}
+            onChangeText={setUf}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Selecione a Cidade"
+            autoCorrect={false}
+            value={city}
+            onChangeText={setCity}
+          />
+          <RectButton style={styles.button} onPress={handleNavigatePoints}>
+            <View style={styles.buttonIcon}>
+              <Text>
+                <Icon name="arrow-right" color="#FFF" size={24}/>
+              </Text>
+            </View>
+            <Text style={styles.buttonText}>
+              Entrar
             </Text>
-          </View>
-          <Text style={styles.buttonText}>
-            Entrar
-          </Text>
-        </RectButton>
-      </View>
-    </ImageBackground>
+          </RectButton>
+        </View>
+      </ImageBackground>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -57,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontFamily: 'Ubuntu_700Bold',
     maxWidth: 260,
-    marginTop: 64
+    marginTop: 32
   },
 
   description: {
@@ -89,7 +119,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: 16,
   },
 
   buttonIcon: {
